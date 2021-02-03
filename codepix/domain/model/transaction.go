@@ -35,8 +35,10 @@ type Transactions struct {
 type Transaction struct {
 	Base `valid:"required"`
 	AccountFrom *Account `valid:"-"`
+	AccountFromID string `json:"account_from_id" valid:"notnull"`
 	Amount float64 `json:"amount" valid:"notnull"`
 	PixKeyTo *PixKey `valid:"-"`
+	PixKeyToID string `json:"pix_key_to_id" valid:"notnull"`
 	Status string `json:"status" valid:"notnull"`
 	Description string `json:"description" valid:"notnull"`
 	CancelDescription string `json:"cancel_description" valid:"-"`
@@ -68,8 +70,10 @@ func (transaction *Transaction) isValid() error {
 func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
 	transaction := Transaction{
 		AccountFrom: accountFrom,
+		AccountFromID: accountFrom.ID,
 		Amount: amount,
 		PixKeyTo: pixKeyTo,
+		PixKeyToID: pixKeyTo.ID,
 		Status: TransactionPending,
 		Description: description,
 	}

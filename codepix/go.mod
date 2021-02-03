@@ -1,4 +1,4 @@
-module github.com/ajvideira/imersao-fsfc/codepix
+module github.com/ajvideira/imersao-fullstack-fullcycle/codepix
 
 go 1.15
 

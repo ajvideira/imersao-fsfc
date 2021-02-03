@@ -3,7 +3,7 @@ package model_test
 import (
 	"testing"
 
-	"github.com/ajvideira/imersao-fsfc/codepix-go/domain/model"
+	"github.com/ajvideira/imersao-fullstack-fullcycle/codepix/domain/model"
 	uuid "github.com/satori/go.uuid"
 	"github.com/stretchr/testify/require"
 )
