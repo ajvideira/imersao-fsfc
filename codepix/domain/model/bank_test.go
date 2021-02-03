@@ -14,7 +14,7 @@ func TestModel_NewBank(t *testing.T) {
 	
 	bank, err := model.NewBank(code, name);
 
-	require.NotNil(t, err)
+	require.Nil(t, err)
 	require.NotEmpty(t, uuid.FromStringOrNil(bank.ID))
 	require.Equal(t, bank.Code, code)
 	require.Equal(t, bank.Name, name)

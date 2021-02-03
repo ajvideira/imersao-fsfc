@@ -7,6 +7,10 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 // Bank represents a model bank
 type Bank struct {
 	Base `valid:"required"`
@@ -31,13 +35,14 @@ func NewBank(code string, name string) (*Bank, error) {
 		Name: name,
 	}
 
+	bank.ID = uuid.NewV4().String()
+	bank.CreatedAt = time.Now()
+	bank.UpdatedAt = time.Now()
+
 	err := bank.isValid()
 	if (err != nil) {
 		return nil, err;
 	}
-
-	bank.ID = uuid.NewV4().String()
-	bank.CreatedAt = time.Now()
-
+	
 	return &bank, nil;
 }

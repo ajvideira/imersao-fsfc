@@ -30,13 +30,13 @@ func NewUser(name string, email string) (*User, error) {
 		Email: email,
 	}
 
+	user.ID = uuid.NewV4().String()
+	user.CreatedAt = time.Now()
+
 	err := user.isValid()
 	if (err != nil) {
 		return nil, err;
 	}
-
-	user.ID = uuid.NewV4().String()
-	user.CreatedAt = time.Now()
 
 	return &user, nil;
 }

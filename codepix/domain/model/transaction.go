@@ -78,13 +78,14 @@ func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, desc
 		Description: description,
 	}
 
+	transaction.ID = uuid.NewV4().String()
+	transaction.CreatedAt = time.Now()
+	transaction.UpdatedAt = time.Now()
+
 	err := transaction.isValid()
 	if (err != nil) {
 		return nil, err;
 	}
-
-	transaction.ID = uuid.NewV4().String()
-	transaction.CreatedAt = time.Now()
 
 	return &transaction, nil;
 }
