@@ -35,13 +35,13 @@ type Transactions struct {
 type Transaction struct {
 	Base `valid:"required"`
 	AccountFrom *Account `valid:"-"`
-	AccountFromID string `json:"account_from_id" valid:"notnull"`
-	Amount float64 `json:"amount" valid:"notnull"`
+	AccountFromID string `json:"account_from_id" gorm:"column:account_from_id;type:uuid;not null" valid:"notnull"`
+	Amount float64 `json:"amount" gorm:"column:ammount;type:float;not null" valid:"notnull"`
 	PixKeyTo *PixKey `valid:"-"`
-	PixKeyToID string `json:"pix_key_to_id" valid:"notnull"`
-	Status string `json:"status" valid:"notnull"`
-	Description string `json:"description" valid:"notnull"`
-	CancelDescription string `json:"cancel_description" valid:"-"`
+	PixKeyToID string `json:"pix_key_to_id" gorm:"column:pix_key_to_id;type:uuid;not null" valid:"notnull"`
+	Status string `json:"status" gorm:"column:status;type:varchar(20);not null" valid:"notnull"`
+	Description string `json:"description" gorm:"column:description;type:varchar(255)" valid:"-"`
+	CancelDescription string `json:"cancel_description" gorm:"column:cancel_description;type:varchar(255)" valid:"-"`
 }
 
 //isValid perform validation of a pix transaction

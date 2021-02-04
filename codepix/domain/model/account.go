@@ -7,14 +7,18 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 // Account represents a model account
 type Account struct {
 	Base `valid:"required"`
-	OwnerName string `json:"owner_name" valid:"notnull"`
-	BankID string `json:"bank_id" valid:"notnull"`
+	OwnerName string `json:"owner_name" gorm:"column:owner_name;type:varchar(255);not null" valid:"notnull"`
+	BankID string `gorm:"column:bank_id;type:uuid;not null" valid:"-"`
 	Bank *Bank `valid:"-"`
-	Number string `json:"number" valid:"notnull"`
-	PixKeys []*PixKey `valid:"-"`
+	Number string `json:"number" gorm:"column:number;type:varchar(20);not null" valid:"notnull"`
+	PixKeys []*PixKey `gorm:"ForeignKey:AccountID" valid:"-"`
 }
 
 //isValid perform validation of a account

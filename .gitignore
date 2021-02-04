@@ -159,3 +159,6 @@ sketch
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/go,react,node,vscode
+
+##postgresql database (for development only)
+.pgdata/
