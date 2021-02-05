@@ -40,7 +40,7 @@ func (processor *KafkaProcessor) Consume() {
 		panic(err)
 	}
 
-	topics := []string{os.Getenv("kafkaTransactionTopic"), os.Getenv("kafkaTransactionConfirmationTopic")}
+	topics := []string{os.Getenv("kafkaTransactionTopic"), os.Getenv("kafkaTransactionConfirmationTopic"), "teste"}
 	err = consumer.SubscribeTopics(topics, nil)
 	if err != nil {
 		panic(err)
@@ -49,14 +49,14 @@ func (processor *KafkaProcessor) Consume() {
 	for {
 		msg, err := consumer.ReadMessage(-1)
 		if err == nil {
-			fmt.Println(string(msg.Value))
+			processor.processMessage(msg)
 		}
 	}
 }
 
 func (processor *KafkaProcessor) processMessage(msg *ckafka.Message) {
-	transactionsTopic := "transactions"
-	transactionsConfirmationTopic := "transaction_confirmation"
+	transactionsTopic := os.Getenv("kafkaTransactionTopic")
+	transactionsConfirmationTopic := os.Getenv("kafkaTransactionConfirmationTopic")
 
 	switch topic := *msg.TopicPartition.Topic; topic {
 	case transactionsTopic:
@@ -64,7 +64,7 @@ func (processor *KafkaProcessor) processMessage(msg *ckafka.Message) {
 	case transactionsConfirmationTopic:
 		processor.processTransactionConfirmation(msg)
 	default:
-		fmt.Println("not a valid topic: ", topic)
+		fmt.Println("unknown topic: ", topic)
 		fmt.Println("message: ", string(msg.Value))
 	}
 }

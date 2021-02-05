@@ -23,6 +23,8 @@ var allCmd = &cobra.Command{
 		deliveryChan := make(chan ckafka.Event)
 		go kafka.DeliveryReport(deliveryChan)
 		producer := kafka.NewKafkaProducer();
+		//kafka.Publish("Teste de funcionamento", "teste", producer, deliveryChan)
+
 		kafkaProcessor := kafka.NewKafkaProcessor(database, producer, deliveryChan)
 		kafkaProcessor.Consume()
 	},
