@@ -162,3 +162,4 @@ sketch
 
 ##postgresql database (for development only)
 .pgdata/
+dbdata/

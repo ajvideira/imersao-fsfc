@@ -57,7 +57,7 @@ func (processor *KafkaProcessor) Consume() {
 func (processor *KafkaProcessor) processMessage(msg *ckafka.Message) {
 	transactionsTopic := os.Getenv("kafkaTransactionTopic")
 	transactionsConfirmationTopic := os.Getenv("kafkaTransactionConfirmationTopic")
-
+	fmt.Println("message: ", string(msg.Value))
 	switch topic := *msg.TopicPartition.Topic; topic {
 	case transactionsTopic:
 		processor.processTransaction(msg)
@@ -65,7 +65,6 @@ func (processor *KafkaProcessor) processMessage(msg *ckafka.Message) {
 		processor.processTransactionConfirmation(msg)
 	default:
 		fmt.Println("unknown topic: ", topic)
-		fmt.Println("message: ", string(msg.Value))
 	}
 }
 
@@ -83,6 +82,7 @@ func (processor *KafkaProcessor) processTransaction(msg *ckafka.Message) error {
 		transaction.PixKeyTo,
 		transaction.PixKeyKindTo,
 		transaction.Description,
+		transaction.ID,
 	)
 	if err != nil {
 		fmt.Println("error registering transaction", err)

@@ -7,16 +7,20 @@ import (
 	"github.com/asaskevich/govalidator"
 )
 
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 // Transaction represents a external entity transaction
 type Transaction struct {
-	ID           string  `json:"id" validate:"required,uuid"`
-	AccountID    string  `json:"accountId" validate:"required,uuid"`
-	Amount       float64 `json:"amount" validate:"required,numeric"`
-	PixKeyTo     string  `json:"pixKeyTo" validate:"required"`
-	PixKeyKindTo string  `json:"pixKeyKindTo" validate:"required"`
-	Description  string  `json:"description" validate:"required"`
-	Status       string  `json:"status" validate:"required"`
-	Error        string  `json:"error"`
+	ID           string  `json:"id" valid:"notnull,uuid"`
+	AccountID    string  `json:"accountId" valid:"notnull,uuid"`
+	Amount       float64 `json:"amount" valid:"notnull,numeric"`
+	PixKeyTo     string  `json:"pixKeyTo" valid:"notnull"`
+	PixKeyKindTo string  `json:"pixKeyKindTo" valid:"notnull"`
+	Description  string  `json:"description" valid:"-"`
+	Status       string  `json:"status" valid:"notnull"`
+	Error        string  `json:"error" valid:"-"`
 }
 
 //isValid perform validation of a pix transaction

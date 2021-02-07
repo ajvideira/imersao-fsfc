@@ -2,6 +2,7 @@ package grpc
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/ajvideira/imersao-fullstack-fullcycle/codepix/application/grpc/pb"
 	"github.com/ajvideira/imersao-fullstack-fullcycle/codepix/application/usecase"
@@ -16,6 +17,7 @@ type PixGrpcService struct {
 //RegisterPixKey registers a new key
 func (service *PixGrpcService) RegisterPixKey(ctx context.Context, in *pb.PixKeyRegistration) (*pb.PixKeyCreatedResult, error) {
 	pixKey, err := service.PixUseCase.RegisterKey(in.Kind, in.Key, in.AccountID);
+	fmt.Println(in)
 	if err != nil {
 		return &pb.PixKeyCreatedResult{
 			Status: "not created",
@@ -30,10 +32,12 @@ func (service *PixGrpcService) RegisterPixKey(ctx context.Context, in *pb.PixKey
 
 //Find searches for a existing key
 func (service *PixGrpcService) Find(ctx context.Context, in *pb.PixKeyFind) (*pb.Pixkey, error) {
+	fmt.Println("serviço chamado!!!")
 	pixKey, err := service.PixUseCase.FindKey(in.Kind, in.Key)
 	if err != nil {
 		return &pb.Pixkey{}, err
 	}
+	fmt.Println("chegou aqui?")
 	return &pb.Pixkey{
 		Id: pixKey.ID,
 		Kind: pixKey.Kind,

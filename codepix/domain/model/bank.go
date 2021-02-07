@@ -14,8 +14,8 @@ func init() {
 // Bank represents a model bank
 type Bank struct {
 	Base `valid:"required"`
-	Code string `json:"code" gorm:"column:code;type:varchar2(20);not null" valid:"notnull"`
-	Name string `json:"name" gorm:"column:name;type:varchar2(255);not null" valid:"notnull"`
+	Code string `json:"code" gorm:"column:code;type:varchar(20);not null" valid:"notnull"`
+	Name string `json:"name" gorm:"column:name;type:varchar(255);not null" valid:"notnull"`
 	Accounts []*Account `gorm:"ForeignKey:BankID" valid:"-"`
 }
 

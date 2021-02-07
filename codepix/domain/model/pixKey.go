@@ -24,11 +24,11 @@ func init() {
 // PixKey represents a model pix key
 type PixKey struct {
 	Base `valid:"required"`
-	Kind string `json:"kind" valid:"notnull"`
-	Key string `json:"key" valid:"notnull"`
-	AccountID string `json:"account_id" valid:"notnull"`
+	Kind string `json:"kind" gorm:"column:kind;type:varchar(20)" valid:"notnull"`
+	Key string `json:"key" gorm:"column:key;type:varchar(255)" valid:"notnull"`
+	AccountID string `json:"account_id" gorm:"column:account_id;type:uuid;not null" valid:"notnull"`
 	Account *Account `valid:"-"`
-	Status string `json:"status" valid:"notnull"`
+	Status string `json:"status" gorm:"type:varchar(20)" valid:"notnull"`
 }
 
 //isValid perform validation of a pix key
