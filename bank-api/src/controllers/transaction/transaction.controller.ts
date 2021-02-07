@@ -100,7 +100,7 @@ export class TransactionController implements OnModuleInit, OnModuleDestroy {
     return transaction;
   }
 
-  @MessagePattern('bank001')
+  @MessagePattern(`bank${process.env.BANK_CODE}`)
   async consumeTransactions(@Payload() message) {
     console.log('entrou em consumeTransactions()');
     console.log(message.value);

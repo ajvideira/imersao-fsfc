@@ -163,3 +163,7 @@ sketch
 ##postgresql database (for development only)
 .pgdata/
 dbdata/
+dbdatabbx/
+dbdatacter/
+dist-bbx
+dist-cter

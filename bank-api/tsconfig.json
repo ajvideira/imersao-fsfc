@@ -13,5 +13,5 @@
     "incremental": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist", ".docker"]
+  "exclude": ["node_modules", "dist", "dist-bbx", "dist-cter", ".docker"]
 }
