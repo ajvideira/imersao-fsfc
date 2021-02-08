@@ -1,0 +1,19 @@
+FROM node:12.20.1-slim
+
+USER node
+
+RUN mkdir -p /home/node/app
+
+WORKDIR /home/node/app
+
+COPY --chown=node package*.json ./
+
+RUN yarn install
+
+COPY --chown=node ./ .
+
+RUN yarn build
+
+EXPOSE 3000
+
+CMD ["yarn", "start:prod"]

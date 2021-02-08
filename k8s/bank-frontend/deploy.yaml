@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-frontend
+  template:
+    metadata:
+      labels:
+        app: bank-frontend
+    spec:
+      containers:
+        - name: bank-frontend
+          image: ajvideira/bank-frontend
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: bank-frontend-volume
+              mountPath: /app/.env
+              subPath: .env
+
+      volumes:
+        - name: bank-frontend-volume
+          configMap:
+            name: bank-frontend-conf
+            items:
+              - key: env
+                path: .env
