@@ -167,3 +167,9 @@ dbdatabbx/
 dbdatacter/
 dist-bbx
 dist-cter
+
+# vercel
+.vercel
+
+.next-001
+.next-002

@@ -33,6 +33,8 @@ export class Transaction {
 
   @ManyToOne(() => BankAccount)
   @JoinColumn({ name: 'bank_account_id' })
+  bankAccount: BankAccount;
+
   @Column()
   bank_account_from_id: string;
 
